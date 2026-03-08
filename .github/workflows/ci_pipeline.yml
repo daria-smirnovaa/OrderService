@@ -44,7 +44,7 @@ jobs:
           distribution: 'temurin'
     
       - name: Check Docker
-        run:
+        run: |
           docker version
           docker ps
 
