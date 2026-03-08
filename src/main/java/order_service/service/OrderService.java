@@ -1,5 +1,7 @@
 package order_service.service;
 
+import event.OrderEvent;
+import event.PaymentEvent;
 import order_service.client.UserServiceClient;
 import order_service.dto.OrderItemRequestDto;
 import order_service.dto.OrderRequestDto;

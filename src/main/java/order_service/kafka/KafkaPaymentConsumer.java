@@ -1,5 +1,6 @@
 package order_service.kafka;//package innowise.payment_service.kafka;
 
+import event.PaymentEvent;
 import order_service.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

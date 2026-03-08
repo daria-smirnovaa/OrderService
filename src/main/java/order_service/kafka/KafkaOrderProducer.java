@@ -1,5 +1,6 @@
 package order_service.kafka;
 
+import event.OrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.NewTopic;

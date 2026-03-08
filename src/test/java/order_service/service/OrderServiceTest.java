@@ -1,6 +1,6 @@
 package order_service.service;
 
-import innowise.common.event.OrderEvent;
+import event.OrderEvent;
 import order_service.client.UserServiceClient;
 import order_service.dto.OrderItemRequestDto;
 import order_service.dto.OrderRequestDto;
@@ -12,7 +12,7 @@ import order_service.entity.Item;
 import order_service.entity.Order;
 import order_service.entity.OrderItem;
 import order_service.kafka.KafkaOrderProducer;
-import innowise.order_service.mapper.OrderMapperImpl;
+import order_service.mapper.OrderMapperImpl;
 import order_service.repository.OrderItemRepository;
 import order_service.repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
