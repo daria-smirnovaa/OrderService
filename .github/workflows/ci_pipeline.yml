@@ -42,6 +42,11 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+    
+      - name: Check Docker
+        run:
+          docker version
+          docker ps
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
