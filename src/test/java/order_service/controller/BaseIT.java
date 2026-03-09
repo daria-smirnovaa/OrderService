@@ -31,7 +31,7 @@ public class BaseIT {
     public static final KafkaContainer KAFKA_CONTAINER =
             new KafkaContainer(
                     DockerImageName.parse("confluentinc/cp-kafka:7.3.0")
-            ).withStartupTimeout(Duration.ofSeconds(120));
+            ).withStartupTimeout(Duration.ofMinutes(3));
 
     @Autowired
     protected MockMvc mockMvc;
