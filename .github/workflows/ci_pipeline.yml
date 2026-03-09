@@ -48,6 +48,7 @@ jobs:
         run: ./gradlew clean test --no-daemon
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
+          TESTCONTAINERS_CHECKS_DISABLE: true
 
       - name: Upload test results
         if: always()
