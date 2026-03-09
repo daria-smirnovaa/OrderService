@@ -42,7 +42,7 @@ jobs:
       - name: Pull Docker images
         run: |
           docker pull postgres:15
-          docker pull apache/kafka:3.7.0
+          docker pull confluentinc/cp-kafka:7.3.0
 
       - name: Run tests
         run: ./gradlew clean test --no-daemon
