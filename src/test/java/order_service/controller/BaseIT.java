@@ -13,6 +13,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.time.Duration;
+
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc
@@ -27,8 +29,9 @@ public class BaseIT {
 
     @Container
     public static final KafkaContainer KAFKA_CONTAINER =
-            new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.0"))
-                    .withEmbeddedZookeeper();
+            new KafkaContainer(
+                    DockerImageName.parse("confluentinc/cp-kafka:7.3.0")
+            ).withStartupTimeout(Duration.ofSeconds(120));
 
     @Autowired
     protected MockMvc mockMvc;
@@ -45,12 +48,5 @@ public class BaseIT {
         registry.add("spring.kafka.producer.bootstrap-servers", KAFKA_CONTAINER::getBootstrapServers);
         registry.add("spring.kafka.consumer.bootstrap-servers", KAFKA_CONTAINER::getBootstrapServers);
         registry.add("kafka.topic.order.name", () -> "CREATE_ORDER");
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("Failed to wait for container initialization", e);
-        }
     }
 }
