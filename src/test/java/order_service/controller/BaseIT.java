@@ -30,7 +30,7 @@ public class BaseIT {
     @Container
     public static final KafkaContainer KAFKA_CONTAINER =
             new KafkaContainer(
-                    DockerImageName.parse("confluentinc/cp-kafka:7.3.0")
+                    DockerImageName.parse("confluentinc/cp-kafka:7.4.0")
             )
                     .withStartupAttempts(3)
                     .withStartupTimeout(Duration.ofMinutes(3));

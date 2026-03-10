@@ -39,16 +39,11 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Pull Docker images
-        run: |
-          docker pull postgres:15
-          docker pull confluentinc/cp-kafka:7.3.0
+      - name: Check docker
+        run: docker info
 
       - name: Run tests
         run: ./gradlew clean test --no-daemon
-        env:
-          TESTCONTAINERS_RYUK_DISABLED: true
-          TESTCONTAINERS_CHECKS_DISABLE: true
 
       - name: Upload test results
         if: always()
