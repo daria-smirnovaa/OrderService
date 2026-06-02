@@ -2,6 +2,8 @@ package order_service.service;
 
 import event.OrderEvent;
 import event.PaymentEvent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import order_service.client.UserServiceClient;
 import order_service.dto.OrderItemRequestDto;
 import order_service.dto.OrderRequestDto;
@@ -56,6 +58,12 @@ public class OrderService {
                 .map(orderMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no order with id %d", id)));
         return addUserInfoToOrderResponse(orderResponseDto);
+    }
+
+    public List<OrderResponseDto> getOrdersByUserId(Long userId) {
+        return orderRepository.findByUserId(userId).stream()
+                .map(orderMapper::toDto)
+                .toList();
     }
 
     @Transactional(readOnly = true)
