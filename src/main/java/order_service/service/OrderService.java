@@ -63,6 +63,7 @@ public class OrderService {
     public List<OrderResponseDto> getOrdersByUserId(Long userId) {
         return orderRepository.findByUserId(userId).stream()
                 .map(orderMapper::toDto)
+                .map(this::addUserInfoToOrderResponse)
                 .toList();
     }
 
