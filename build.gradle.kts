@@ -39,7 +39,7 @@ dependencies {
     /**
      * Test containers
      */
-    implementation(platform("org.testcontainers:testcontainers-bom:1.19.3"))
+    implementation("org.testcontainers:testcontainers-bom:1.19.3")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6")

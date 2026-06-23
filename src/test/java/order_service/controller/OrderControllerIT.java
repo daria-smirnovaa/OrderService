@@ -1,6 +1,5 @@
 package order_service.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import order_service.client.UserServiceClient;
 import order_service.dto.OrderItemRequestDto;
 import order_service.dto.OrderRequestDto;
@@ -10,23 +9,20 @@ import order_service.dto.client.UserDto;
 import order_service.entity.Item;
 import order_service.entity.Order;
 import order_service.entity.OrderItem;
+import order_service.repository.ItemRepository;
 import order_service.repository.OrderRepository;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
-import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,19 +39,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-@SpringBootTest
-@Testcontainers
-@AutoConfigureMockMvc
 class OrderControllerIT extends BaseIT {
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @Autowired
     private OrderRepository orderRepository;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private ItemRepository itemRepository;
 
     @MockBean
     private UserServiceClient userService;
@@ -79,6 +69,8 @@ class OrderControllerIT extends BaseIT {
                 .name("Test Item")
                 .price(50.0)
                 .build();
+
+        itemRepository.save(item);
 
         OrderItem orderItem = OrderItem.builder()
                 .id(ITEM_ID)
